@@ -1,25 +1,17 @@
 const express = require("express");
 const { Router } = express;
 const Image = require("../models").image;
-const { toData } = require("../auth/jwt");
+// const { toData } = require("../auth/jwt");
+const authMiddleware = require('../auth/middleware');
 
 const router = new Router();
 
-router.get("/auth/messy", async (req, res, next) => {
-  const auth =
-    req.headers.authorization && req.headers.authorization.split(" ");
-  if (auth && auth[0] === "Bearer" && auth[1]) {
-    try {
-      const data = toData(auth[1]);
-    } catch (e) {
-      res.status(400).send("Inavlid JWT token");
-    }
-    const images = await Image.findAll();
-    res.json(images);
-  } else {
-    res.status(401).send({
-      message: "Please supply some valid credentials",
-    });
+router.get("/auth/messy", authMiddleware, async (req, res, next) => {
+  try {
+    const allImages = await Image.findAll();
+    res.json(allImages);
+  } catch (e) {
+    next(e);
   }
 });
 

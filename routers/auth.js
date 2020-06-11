@@ -3,6 +3,13 @@ const { toJWT } = require("../auth/jwt");
 const bcrypt = require('bcrypt');
 const router = new Router();
 const User = require("../models").user;
+const authMiddleware = require('../auth/middleware');
+
+router.get("/test-auth", authMiddleware, (req, res) => {
+  res.send({
+    message: `Thanks for visiting the secret endpoint ${req.user.email}.`,
+  });
+});
 
 router.post("/", async (req, res, next) => {
   try {
