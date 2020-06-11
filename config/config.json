@@ -1,0 +1,23 @@
+{
+  "development": {
+    "url": "postgres://ezkrzwzi:I_jFHtKAoNHaoan80Gei0kkC_MJvRKUg@balarama.db.elephantsql.com:5432/ezkrzwzi",
+    "dialect": "postgres",
+    "operatorsAliases": "0"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
